@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-from pylab import *
+from scipy import *
 import numpy as np
 from scipy.io import wavfile
 from ModemUtils import *
