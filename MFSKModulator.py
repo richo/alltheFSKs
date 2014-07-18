@@ -2,17 +2,17 @@
 # MFSKModulator.py - Constant Amplitude, Continuous Phase MFSK Modulator Class
 #
 # Copyright 2013 Mark Jessop <mark.jessop@adelaide.edu.au>
-# 
+#
 # This library is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Lesser General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Lesser General Public License
 # along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -25,6 +25,7 @@ import pyaudio
 FORMAT = pyaudio.paInt16
 p = pyaudio.PyAudio()
 
+
 class MFSKModulator(object):
     """ Constant Amplitude/Phase MFSK Modulator Class """
     def __init__(self, sample_rate=8000, base_freq=1000, symbol_rate=31.25, tone_spacing=31.25, start_silence=0, amplitude=0.5):
@@ -34,6 +35,7 @@ class MFSKModulator(object):
         self.tone_spacing = tone_spacing
         self.symbol_length = int(sample_rate/symbol_rate)
         self.amplitude = amplitude
+
 
         self.phase = int(0)
         self.baseband = np.zeros(start_silence*self.symbol_length)
@@ -85,7 +87,7 @@ class MFSKModulator(object):
             self.write(symbol)
 
     def modulate_bits(self, symbol_bits, bit_array):
-        """ Converts a numpy array of bits (0,1) to gray coded symbols, then transmits them. 
+        """ Converts a numpy array of bits (0,1) to gray coded symbols, then transmits them.
         The array length must be a multiple of the symbol bits.
         """
 
