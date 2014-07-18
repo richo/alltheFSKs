@@ -21,6 +21,9 @@ import numpy as np
 from scipy.io import wavfile
 from ModemUtils import *
 
+import pyaudio
+FORMAT = pyaudio.paInt16
+p = pyaudio.PyAudio()
 
 class MFSKModulator(object):
     """ Constant Amplitude/Phase MFSK Modulator Class """
@@ -66,6 +69,12 @@ class MFSKModulator(object):
     def write_wave(self,filename):
         scaled = np.int16(self.baseband * 32767)
         wavfile.write(filename,self.sample_rate,scaled)
+
+    def write_to_stream(self, stream=None):
+        stream = stream or p.open(format=FORMAT, rate=self.sample_rate, output=True)
+
+        scaled = np.int16(self.baseband * 32767)
+        stream.write(scaled)
 
     def modulate_symbol(self,symbol_list=0):
         for symb in symbol_list:
